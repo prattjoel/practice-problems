@@ -48,8 +48,8 @@ const reverseInteger = (integer) => {
   }
   
   // if (neg) outputStr = '-' + outputStr.slice(0, outputStr.length-1);
-  
-  return parseInt(outputStr) <= (Math.pow(2, 31) - 1) && parseInt(outputStr) >= Math.pow(-2, 31) ? parseInt(outputStr) : 0;
+  const output = parseInt(outputStr);
+  return output <= (Math.pow(2, 31) - 1) && output >= Math.pow(-2, 31) ? output : 0;
 }
 
 
