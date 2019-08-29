@@ -37,13 +37,17 @@
 const reverseInteger = (integer) => {
   const intStr = integer.toString();
   let outputStr = '';
-  const neg = intStr[0] === '-' ? '-' : null;
+  // const neg = intStr[0] === '-' ? '-' : null;
   
   for (let i=(intStr.length-1); i >= 0; i--){
-    outputStr += intStr[i];
+    if (intStr[i] === '-'){
+      outputStr = '-' + outputStr;
+    } else {
+      outputStr += intStr[i];
+    }
   }
   
-  if (neg) outputStr = '-' + outputStr.slice(0, outputStr.length-1);
+  // if (neg) outputStr = '-' + outputStr.slice(0, outputStr.length-1);
   
   return parseInt(outputStr) <= (Math.pow(2, 31) - 1) && parseInt(outputStr) >= Math.pow(-2, 31) ? parseInt(outputStr) : 0;
 }
