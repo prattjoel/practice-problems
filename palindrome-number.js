@@ -21,45 +21,19 @@
 
 const palNum = (num) => {
   
-  if (num < 0 || num % 10 === 0){
-    console.log('neg');
+  if (num < 0 || num % 10 === 0 && num !=0){
     return false;
   }
-  console.log(num%10);
-  console.log(num);
-  if (num % 10 === num){
-    return true;
-  }
-  
-  
-  let newNum = num;
-  // let digit = newNum % 10;
-  let revertedNum = 0;
-  // let count = 0;
-  
-  while ((newNum > revertedNum) ){
-    console.log({newNum});
-    console.log({revertedNum});
 
-    // console.log({digit});
-    if (!revertedNum || Math.floor(newNum/10) > (revertedNum * 10) + newNum % 10){
-      revertedNum = (revertedNum * 10) + newNum % 10;
-      newNum = Math.floor(newNum/10);
-    } else if (Math.floor(newNum/10) === (revertedNum * 10) + newNum % 10){
-      return true;
-    } else {
-      // revertedNum = (revertedNum * 10) + newNum % 10;
-      return ((revertedNum * 10) + newNum % 10 === newNum)
-      // break;
-    }
-    // count++
-  }
+  let newNum = num;
+  let revertedNum = 0;
   
-  // revertedNum = (revertedNum * 10) + newNum % 10
-  console.log('-----');
-  console.log({revertedNum});
-  console.log({newNum});
-  return (revertedNum === newNum)
+  while (newNum > revertedNum){
+    revertedNum = (revertedNum * 10) + newNum % 10;
+    newNum = Math.floor(newNum/10);
+
+  }
+  return (revertedNum === newNum || newNum === Math.floor(revertedNum/10))
 }
 
 // const palNum = (num) => {
@@ -79,7 +53,8 @@ const palNum = (num) => {
 
 
 console.log(palNum(21120));
-// console.log(palNum(1221));
-// console.log(palNum(121));
-// console.log(palNum(-121));
-// console.log(palNum(10));
+console.log(palNum(1221));
+console.log(palNum(121));
+console.log(palNum(-121));
+console.log(palNum(10));
+console.log(palNum(1));
