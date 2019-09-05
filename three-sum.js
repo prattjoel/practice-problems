@@ -31,56 +31,59 @@ const threeSum = (nums) => {
     return [];
   }
   
-  let start = 0;
-  let middle = 1;
-  let end = 2;
-  let twoSum = nums[start] + nums[middle]
-  let target = 0 - twoSum;
-  let output = [];
-  let currentSums = [nums[start], nums[middle]];
+  const sortedNums = nums.sort((a,b) => a - b);
+  const output = []  
   
-  while (start < (nums.length - 3)){ 
-    if (nums[end] === target){
-      currentSums.push(nums[end]);
-      currentSums = currentSums.sort()
-      let matchCount = 0;
-      let isMatch = false
-      for (let i = 0; i < output.length; i++){
+  for (let i = 0; i < nums.length - 2; i++){
+    if (i !== 0 && sortedNums[i] === sortedNums[i-1]){
+      continue;
+    }
+    
+    if (sortedNums[i] > 0){
+      break;
+    }
+    
+    let start = i + 1;
+    let end = sortedNums.length-1;
+    
+    while (start < end) {
+      const sum = sortedNums[i] + sortedNums[start] + sortedNums[end];
+      if ( sum === 0){
+        output.push([sortedNums[i], sortedNums[start], sortedNums[end]]);
+        while (sortedNums[start] === sortedNums[start + 1]){
+          start++
+        }
+        start++;
+        while (sortedNums[end] === sortedNums[end - 1]){
+          end--
+        }
+        end--
         
-        if (output[i][0] === currentSums[0] && output[i][1] === currentSums[1] && output[i][2] === currentSums[2]) {
-          isMatch = true
+      } else if (sum < 0) {
+        while (sortedNums[start] === sortedNums[start + 1]){
+          start++
         }
-      }
-      if (!isMatch){
-        output.push(currentSums);
-      }
-      currentSums = [nums[start], nums[middle]];
-      twoSum = nums[start] + nums[middle];
-      target = 0 - twoSum;
-      end++
-    } else {
-      end++
-      if (end >= nums.length) {
-        middle++
-        if (middle >= nums.length){
-          start++;
-          middle = start + 1;
-          end = middle + 1;
+        start++;
+      } else {
+        while (sortedNums[end] === sortedNums[end - 1]){
+          end--
         }
-        end = middle + 1;
-        twoSum = nums[start] + nums[middle]
-        target = 0 - twoSum;
-        currentSums = [nums[start], nums[middle]];
+        end--
       }
     }
   }
-  
   return output;
 }
-// 
+// // 
 // console.log(threeSum([-1, 0, 1, 2, -1, -4]));
 // console.log(threeSum([0,0,0]));
 // console.log(threeSum([0,0]));
-console.log(threeSum([1,-1,-1,0]));
+// console.log(threeSum([1,-1,-1,0]));
+// console.log(threeSum([0,0,0,0]));
+// console.log(threeSum([-2,0,1,1,2]));
+// console.log(threeSum([-5,1,-3,-1,-4,-2,4,-1,-1]));
+
+console.log(threeSum([-2,0,0,2,2]));
+
 
 
