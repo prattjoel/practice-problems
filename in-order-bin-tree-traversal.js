@@ -18,24 +18,54 @@ function Node (value) {
   this.right = null; 
 }
 
-const inorderTraversal = (tree) => {
-  if (tree === null){
-    return [];
+class Stack {
+  constructor() {
+    this.store = []
   }
-  
-  const output = inorderTraversal(tree.left);
-  output.push(tree.val)
-  return [...output, ...inorderTraversal(tree.right)]
+  push = (val) => {
+    this.store.push(val)
+    console.log(this.store);
+  }
+  pop = () => {
+    if (this.store.length > 0){
+      return this.store.pop();
+    }
+  }
+  length = () => {
+    return this.store.length;
+  }
 }
 
-// const traverse = (tree) => {
+// const inorderTraversal = (tree) => {
 //   if (tree === null){
 //     return [];
 //   }
-//   const output = traverse(tree.left);
-//   ouput.push(tree.val)
-//   return [...output, ...traverse(tree.right)]
+// 
+//   const output = inorderTraversal(tree.left);
+//   output.push(tree.val)
+//   return [...output, ...inorderTraversal(tree.right)]
 // }
+
+const inorderTraversal = (tree) => {
+  const output = [];
+  const stack = new Stack();
+  
+  while (tree || stack.length() > 0){
+    if (!tree) {
+      tree = stack.pop();
+      // console.log({tree});
+      output.push(tree.val)
+      tree = tree.right;
+    } else {
+      stack.push(tree);
+      tree = tree.left;
+      console.log({tree});
+    }
+  }
+  
+  return output;
+}
+
 
 const binTree = new Node(2);
 binTree.left = new Node(1);
