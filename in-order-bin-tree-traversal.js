@@ -24,7 +24,6 @@ class Stack {
   }
   push = (val) => {
     this.store.push(val)
-    console.log(this.store);
   }
   pop = () => {
     if (this.store.length > 0){
@@ -36,16 +35,6 @@ class Stack {
   }
 }
 
-// const inorderTraversal = (tree) => {
-//   if (tree === null){
-//     return [];
-//   }
-// 
-//   const output = inorderTraversal(tree.left);
-//   output.push(tree.val)
-//   return [...output, ...inorderTraversal(tree.right)]
-// }
-
 const inorderTraversal = (tree) => {
   const output = [];
   const stack = new Stack();
@@ -53,13 +42,11 @@ const inorderTraversal = (tree) => {
   while (tree || stack.length() > 0){
     if (!tree) {
       tree = stack.pop();
-      // console.log({tree});
       output.push(tree.val)
       tree = tree.right;
     } else {
       stack.push(tree);
       tree = tree.left;
-      console.log({tree});
     }
   }
   
